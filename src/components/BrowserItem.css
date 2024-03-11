@@ -1,0 +1,16 @@
+.item-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+}
+.item-info {
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+}
+.item-time-access {
+  color: 475569;
+}

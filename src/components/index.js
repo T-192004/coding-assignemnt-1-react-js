@@ -78,7 +78,7 @@ const initialhistoryList = [
 ]
 class BrowserHistory extends Component {
   state = {
-    searchInput: ' ',
+    searchInput: '',
     historyList: initialhistoryList,
   }
 
@@ -99,9 +99,11 @@ class BrowserHistory extends Component {
 
   render() {
     const {searchInput, historyList} = this.state
-    const searchResults = historyList.map(eachList =>
+    const searchResults = historyList.filter(eachList =>
       eachList.title.includes(searchInput),
     )
+    const isSearchResultEmpty = searchResults.length === 0
+    console.log(searchResults)
     return (
       <div className="bg-contianer">
         <div className="navbar-container">
@@ -126,15 +128,19 @@ class BrowserHistory extends Component {
           </div>
         </div>
         <div className="result-container">
-          <ul className="results-list">
-            {searchResults.map(eachItem => (
-              <BrowserItem
-                eachItem={eachItem}
-                key={eachItem.id}
-                deleteItem={this.deleteItem}
-              />
-            ))}
-          </ul>
+          {isSearchResultEmpty ? (
+            <p className="empty-statement">There is no history to show</p>
+          ) : (
+            <ul className="results-list">
+              {searchResults.map(eachItem => (
+                <BrowserItem
+                  eachItem={eachItem}
+                  key={eachItem.id}
+                  deleteItem={this.deleteItem}
+                />
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     )
